@@ -1,8 +1,15 @@
 import { config } from "./config";
+import qs from "qs";
 
-export const fetchData = async <T>(path: string): Promise<T> => {
+export const fetchData = async <T>(
+  path: string,
+  urlParamsObject = {}
+): Promise<T> => {
   try {
-    const url = `${config.urlStrapi}/api${path}?populate=*`;
+    const queryString = qs.stringify(urlParamsObject);
+    const url = `${config.urlStrapi}/api${path}${
+      queryString ? `?${queryString}` : ""
+    }`;
     const headersOptions = {
       next: { revalidate: config.revalidateTime },
       headers: {

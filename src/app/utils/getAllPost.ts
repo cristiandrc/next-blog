@@ -14,8 +14,12 @@ interface dataResponse {
   data: AllPostType[];
 }
 
+const urlParamsObject = {
+  populate: ["cover", "category", "authorBio", "blocks"],
+};
+
 export const getAllPost = async () => {
-  const { data } = await fetchData<dataResponse>("/articles");
+  const { data } = await fetchData<dataResponse>("/articles", urlParamsObject);
 
   const post = data.map(
     ({ id, attributes: { title, description, cover, blocks } }) => {
