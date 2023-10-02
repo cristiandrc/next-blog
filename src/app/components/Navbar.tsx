@@ -36,7 +36,7 @@ export default function Navbar({
   logoText: string;
 }) {
   return (
-    <header className="flex items-center justify-around max-w-screen-xxl m-auto w-screen pl-5 pr-5">
+    <header className="flex items-center justify-between max-w-screen-xl m-auto w-screen pl-5 pr-5">
       <Link href="/">
         <img src={logoUrl} alt={logoText} width={50} />
       </Link>

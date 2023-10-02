@@ -61,7 +61,6 @@ export const getGlobal = async () => {
   const {
     data: { attributes },
   } = await fetchData<GlobalType>("/global", urlParamsObject);
-  console.log({ attributes });
 
   return {
     title: attributes.metadata.metaTitle,

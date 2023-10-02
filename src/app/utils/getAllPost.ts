@@ -1,14 +1,24 @@
 import { config } from "./config";
 import { fetchData } from "./fetchDate";
 
-interface AllPostType {
+export interface Post {
   id: number;
-  attributes: {
-    title: string;
-    description: string;
-    cover: { data: { attributes: { url: string } } };
-    blocks: { content: string }[];
+  title: string;
+  description: string;
+  slug: string;
+  category: {
+    data: {
+      attributes: {
+        slug: string;
+      };
+    };
   };
+  cover: { data: { attributes: { url: string } } };
+  blocks: { content: string }[];
+}
+export interface AllPostType {
+  id: number;
+  attributes: Post;
 }
 interface dataResponse {
   data: AllPostType[];
@@ -20,13 +30,19 @@ const urlParamsObject = {
 
 export const getAllPost = async () => {
   const { data } = await fetchData<dataResponse>("/articles", urlParamsObject);
+  console.log(data[2].attributes);
 
   const post = data.map(
-    ({ id, attributes: { title, description, cover, blocks } }) => {
+    ({
+      id,
+      attributes: { title, description, cover, blocks, slug, category },
+    }) => {
       return {
         id,
         title,
         description,
+        slug,
+        categorySlug: category.data.attributes.slug,
         cover: `${config.urlStrapi}${cover.data.attributes.url}`,
         blocks,
       };
