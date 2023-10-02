@@ -6,6 +6,9 @@ export const fetchData = async <T>(
   urlParamsObject = {}
 ): Promise<T> => {
   try {
+    if (!config.Token)
+      throw new Error("The Strapi token environment variable is no set");
+
     const queryString = qs.stringify(urlParamsObject);
     const url = `${config.urlStrapi}/api${path}${
       queryString ? `?${queryString}` : ""

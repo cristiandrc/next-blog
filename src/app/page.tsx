@@ -1,5 +1,5 @@
-import ListPost from "./components/ListPost";
-import { getAllPost } from "./utils/getAllPost";
+import ListPost from "../components/ListPost";
+import { getAllPost } from "../utils/getAllPost";
 
 export default async function Home() {
   const post = await getAllPost();

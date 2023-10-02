@@ -1,6 +1,5 @@
 import { config } from "./config";
 import { fetchData } from "./fetchDate";
-import qs from "qs";
 
 interface GlobalType {
   data: {
@@ -55,9 +54,6 @@ const urlParamsObject = {
 };
 
 export const getGlobal = async () => {
-  if (!config.Token)
-    throw new Error("The Strapi token environment variable is no set");
-
   const {
     data: { attributes },
   } = await fetchData<GlobalType>("/global", urlParamsObject);

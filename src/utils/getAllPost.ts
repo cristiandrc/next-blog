@@ -30,7 +30,6 @@ const urlParamsObject = {
 
 export const getAllPost = async () => {
   const { data } = await fetchData<dataResponse>("/articles", urlParamsObject);
-  console.log(data[2].attributes);
 
   const post = data.map(
     ({
